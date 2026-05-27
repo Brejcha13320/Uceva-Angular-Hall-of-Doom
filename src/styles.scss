@@ -1,1 +1,410 @@
 /* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --red: #E24B4A;
+    --red-d: #A32D2D;
+    --amber: #EF9F27;
+    --amber-d: #854F0B;
+    --purple: #7F77DD;
+    --purple-d: #3C3489;
+    --bg: #0d0d14;
+    --bg2: #13131f;
+    --card: rgba(255, 255, 255, 0.04);
+    --border: rgba(255, 255, 255, 0.09);
+    --text: #e8e8f0;
+    --muted: rgba(232, 232, 240, 0.45);
+    --mono: 'Courier New', monospace;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── Fondo de código flotando ── */
+.code-bg {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+    pointer-events: none;
+
+    z-index: -1; /* IMPORTANTE */
+}
+
+/* Líneas flotando */
+.code-line {
+    position: absolute;
+
+    white-space: nowrap;
+    line-height: 1;
+
+    font-family: var(--mono, monospace);
+    font-size: 11px;
+
+    color: rgba(127, 119, 221, 0.10);
+
+    user-select: none;
+    will-change: transform;
+
+    animation-name: scrollUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* Animación */
+@keyframes scrollUp {
+    from {
+        transform: translateY(120vh);
+    }
+
+    to {
+        transform: translateY(-140vh);
+    }
+}
+/* ── Layout ── */
+.page {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+}
+
+/* ── Hero ── */
+.hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.hero-icon {
+    font-size: 72px;
+    display: block;
+    margin-bottom: 1rem;
+    animation: wiggle 2.4s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+
+    0%,
+    100% {
+        transform: rotate(-4deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(4deg) scale(1.08);
+    }
+}
+
+.tag {
+    display: inline-block;
+    background: rgba(226, 75, 74, .18);
+    border: 1px solid rgba(226, 75, 74, .35);
+    color: #f87171;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 4px 14px;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: .6rem;
+    letter-spacing: -.03em;
+}
+
+h1 .accent {
+    color: var(--red);
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto 1.8rem;
+}
+
+/* ── Barra de "sistema en peligro" ── */
+.danger-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(226, 75, 74, .1);
+    border: 1px solid rgba(226, 75, 74, .25);
+    border-radius: 10px;
+    padding: .7rem 1.1rem;
+    margin-bottom: 2.5rem;
+    font-size: .85rem;
+    color: #f87171;
+}
+
+.danger-bar .blink {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f87171;
+    flex-shrink: 0;
+    animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: .15
+    }
+}
+
+/* ── Sección "diagrama" decorativa ── */
+.arch-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.arch-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .55rem 1rem;
+    font-size: .78rem;
+    color: var(--muted);
+    font-family: var(--mono);
+    white-space: nowrap;
+    transition: border-color .3s, color .3s;
+}
+
+.arch-box:hover {
+    border-color: var(--purple);
+    color: var(--text);
+}
+
+.arch-box.dead {
+    border-color: rgba(226, 75, 74, .4);
+    color: #f87171;
+}
+
+.arch-arrow {
+    color: rgba(255, 255, 255, .2);
+    font-size: 1.1rem;
+    padding: 0 4px;
+}
+
+.arch-label {
+    font-size: .65rem;
+    color: rgba(226, 75, 74, .7);
+    text-align: center;
+    margin-top: 4px;
+    font-family: var(--mono);
+}
+
+.arch-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ── Título sección ── */
+.section-title {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(226, 75, 74, .2);
+}
+
+/* ── Lista de condenados ── */
+.doom-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 3rem;
+}
+
+.doom-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: .9rem 1.1rem;
+    animation: fadeSlide .4s ease both;
+    transition: border-color .25s;
+}
+
+.doom-card:hover {
+    border-color: rgba(226, 75, 74, .35);
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateX(-18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.doom-rank {
+    font-family: var(--mono);
+    font-size: .75rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, .2);
+    min-width: 22px;
+    text-align: right;
+}
+
+.doom-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 15px;
+    flex-shrink: 0;
+    border: 1px solid rgba(226, 75, 74, .3);
+    background: rgba(226, 75, 74, .1);
+    color: #f87171;
+}
+
+.doom-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.doom-name {
+    font-weight: 600;
+    font-size: .95rem;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.doom-reason {
+    font-size: .78rem;
+    color: var(--muted);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.doom-score {
+    font-family: var(--mono);
+    font-size: .8rem;
+    font-weight: 700;
+    color: var(--red);
+    flex-shrink: 0;
+    background: rgba(226, 75, 74, .1);
+    border: 1px solid rgba(226, 75, 74, .2);
+    border-radius: 6px;
+    padding: 3px 8px;
+}
+
+/* ── Métricas de daño ── */
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 3rem;
+}
+
+.metric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.metric-val {
+    font-size: 1.8rem;
+    font-weight: 900;
+    font-family: var(--mono);
+    color: var(--amber);
+    display: block;
+}
+
+.metric-lbl {
+    font-size: .72rem;
+    color: var(--muted);
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+/* ── Quote final ── */
+.quote-block {
+    background: rgba(127, 119, 221, .08);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 3rem;
+}
+
+.quote-text {
+    font-style: italic;
+    color: rgba(232, 232, 240, .7);
+    font-size: .95rem;
+    line-height: 1.7;
+}
+
+.quote-author {
+    margin-top: .5rem;
+    font-size: .75rem;
+    color: rgba(127, 119, 221, .7);
+    font-family: var(--mono);
+}
+
+/* ── Footer ── */
+footer {
+    text-align: center;
+    font-size: .75rem;
+    color: rgba(232, 232, 240, .2);
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+}
+
+footer span {
+    color: rgba(226, 75, 74, .6);
+}
