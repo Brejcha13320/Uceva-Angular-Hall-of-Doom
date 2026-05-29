@@ -29,7 +29,7 @@ jobs:
 
       # Instalar dependencias
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       # Build del Proyecto Angular
       - name: Build Angular Project
