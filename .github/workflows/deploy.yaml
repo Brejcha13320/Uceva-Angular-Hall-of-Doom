@@ -29,7 +29,7 @@ jobs:
 
       # Instalar dependencias
       - name: Install Dependencies
-        run: npm install
+        run: npm install --verbose
 
       # Build del Proyecto Angular
       - name: Build Angular Project
