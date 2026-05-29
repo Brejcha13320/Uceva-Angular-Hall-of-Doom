@@ -21,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
 
       # Configurar Angular CLI
       - name: Setup Angular CLI
@@ -29,24 +29,24 @@ jobs:
 
       # Instalar dependencias
       - name: Install Dependencies
-        run: npm install --verbose
+        run: npm install
 
       # Build del Proyecto Angular
       - name: Build Angular Project
         run: ng build
 
-      - name: Deploy to SiteGround using rsync
-        run: |
-          echo "$SSH_PRIVATE_KEY" > private_key
-          chmod 600 private_key
+      # - name: Deploy to SiteGround using rsync
+      #   run: |
+      #     echo "$SSH_PRIVATE_KEY" > private_key
+      #     chmod 600 private_key
           
-          rsync -avz --delete --dry-run \
-          -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT"  \
-          dist/Uceva-Angular-Hall-of-Doom/browser $USER@$HOST:$REMOTE_PATH
+      #     rsync -avz --delete --dry-run \
+      #     -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT"  \
+      #     dist/Uceva-Angular-Hall-of-Doom/browser $USER@$HOST:$REMOTE_PATH
 
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          HOST: ${{ secrets.HOST }}
-          USER: ${{ secrets.USER }}
-          PORT: ${{ secrets.PORT }}
-          REMOTE_PATH: ${{ secrets.PATH }}
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      #     HOST: ${{ secrets.HOST }}
+      #     USER: ${{ secrets.USER }}
+      #     PORT: ${{ secrets.PORT }}
+      #     REMOTE_PATH: ${{ secrets.PATH }}
