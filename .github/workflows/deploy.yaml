@@ -35,7 +35,7 @@ jobs:
       - name: Build Angular Project
         run: ng build
 
-      # - name: Deploy to SiteGround using rsync
+      - name: Deploy to SiteGround using rsync
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
