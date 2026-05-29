@@ -41,13 +41,13 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
           
-         
+          
 
           ssh -i private_key \
           -o StrictHostKeyChecking=no \
           -p $PORT \
           $USER@$HOST \
-          "pwd && ls -lah $REMOTE_PATH"
+          "pwd && ls -la"
 
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
