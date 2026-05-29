@@ -47,7 +47,7 @@ jobs:
           -o StrictHostKeyChecking=no \
           -p $PORT \
           $USER@$HOST \
-          "pwd && ls -la"
+           "cd /home/customer/www && pwd && ls -la"
 
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
