@@ -41,9 +41,13 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
           
-          rsync -avzi --delete --dry-run \
-          -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT"  \
-          dist/Uceva-Angular-Hall-of-Doom/browser $USER@$HOST:$REMOTE_PATH
+         
+
+          ssh -i private_key \
+          -o StrictHostKeyChecking=no \
+          -p $PORT \
+          $USER@$HOST \
+          "pwd && ls -lah $REMOTE_PATH"
 
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
