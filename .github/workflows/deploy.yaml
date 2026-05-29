@@ -31,6 +31,10 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
+      # Build del Proyecto Angular
+      - name: Build Angular Project
+        run: ng build
+
       - name: Pruebas Consola
         run: |
           node -v
