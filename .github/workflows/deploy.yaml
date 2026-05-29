@@ -1,0 +1,24 @@
+name: Deploy to Siteground - HallOfDoom
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clonar el repositorio en la máquina del runner
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Pruebas Consola
+        run: |
+          ls -la
+          
+      
