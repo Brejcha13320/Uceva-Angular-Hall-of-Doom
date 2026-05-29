@@ -17,8 +17,23 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # Configurar Node.js
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # Configurar Angular CLI
+      - name: Setup Angular CLI
+        run: npm install -g @angular/cli
+
+      # Instalar dependencias
+      - name: Install Dependencies
+        run: npm install
+
       - name: Pruebas Consola
         run: |
+          node -v
+          ng version
           ls -la
           
-      
