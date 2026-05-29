@@ -35,9 +35,18 @@ jobs:
       - name: Build Angular Project
         run: ng build
 
-      - name: Pruebas Consola
+      - name: Deploy to SiteGround using rsync
         run: |
-          node -v
-          ng version
-          ls -la
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
           
+          rsync -avz --delete --dry-run \
+          -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT"  \
+          dist/Uceva-Angular-Hall-of-Doom/browser $USER@$HOST:$PATH
+
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HOST: ${{ secrets.HOST }}
+          USER: ${{ secrets.USER }}
+          PORT: ${{ secrets.PORT }}
+          PATH: ${{ secrets.PATH }}
