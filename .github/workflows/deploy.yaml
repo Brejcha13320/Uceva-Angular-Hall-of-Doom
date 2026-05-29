@@ -41,7 +41,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
           
-          rsync -avz --delete --dry-run \
+          rsync -avzi --delete --dry-run \
           -e "ssh -i private_key -o StrictHostKeyChecking=no -p $PORT"  \
           dist/Uceva-Angular-Hall-of-Doom/browser $USER@$HOST:$REMOTE_PATH
 
