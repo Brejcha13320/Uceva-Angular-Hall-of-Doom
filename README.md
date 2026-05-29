@@ -1,5 +1,7 @@
 # UcevaAngularHallOfDoom
 
+This project is a example for use the pipelines
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
 
 ## Development server
